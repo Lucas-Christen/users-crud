@@ -1,17 +1,44 @@
+// Configurações padrão para o menu mobile
+.menu-button {
+  display: none; // Esconde o botão hambúrguer por padrão
+}
 
+.mobile-nav {
+  display: none; // Esconde a navegação mobile por padrão
+  flex-direction: column;
+  gap: 16px;
+  padding: 24px;
+  background-color: #fff;
+  position: absolute;
+  top: 65px; // Posição logo abaixo do header
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  border-bottom: 1px solid var(--iris-divider);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+
+  // Animação de entrada
+  transform: translateY(-100%);
+  transition: transform 0.3s ease-in-out, visibility 0.3s;
+  visibility: hidden;
+}
+
+.mobile-nav.menu-open {
+  transform: translateY(0);
+  visibility: visible;
+}
+
+// Media Query para telas de celular (até 768px)
 @media (max-width: 768px) {
-  .row {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 8px;
+  .desktop-nav {
+    display: none; // Esconde a navegação de desktop
   }
 
-  .nav {
-    justify-content: space-between;
-    flex-wrap: wrap;
+  .menu-button {
+    display: block; // Mostra o botão hambúrguer
   }
 
-  .brand img {
-    height: 24px; 
+  .mobile-nav {
+    display: flex; // Permite que a navegação mobile seja exibida
   }
 }

@@ -3,11 +3,12 @@ import { RouterOutlet } from '@angular/router';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { LoadingService } from './core/services/loading.service';
 import { HeaderComponent } from './shared/layout/header.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, MatProgressBarModule, HeaderComponent],
+  imports: [RouterOutlet, MatProgressBarModule, CommonModule, HeaderComponent],
   template: `
     <mat-progress-bar *ngIf="loading.isLoading()" mode="indeterminate" class="topbar"></mat-progress-bar>
     <app-header></app-header>
