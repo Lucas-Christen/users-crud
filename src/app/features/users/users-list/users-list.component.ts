@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, AfterViewInit, signal } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UsersService } from '../../../core/services/users.service';
 import { User } from '../../../core/models/user.model';
@@ -35,6 +35,8 @@ export class UsersListComponent implements OnInit, AfterViewInit {
   // paginator e sort
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild('searchInput') searchInput!: ElementRef<HTMLInputElement>;
+
 
   constructor(private api: UsersService, private toast: MatSnackBar) {
     // filtro por nome OU email

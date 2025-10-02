@@ -1,46 +1,139 @@
-/* ---- Fonts ---- */
+/* Importando o Angular Material para tema */
+@use '@angular/material' as mat;
+
+/* ---- Paleta IRIS (cores personalizadas) ---- */
+:root {
+  --iris-primary: #F36C21; /* Laranja principal */
+  --iris-primary-strong: #E65E10; /* Hover */
+  --iris-outline: #F36C21; /* Borda CTA outlined */
+  --iris-bg: #FFF7F0;       /* Fundo hero pêssego claro */
+  --iris-surface: #FFFFFF;  /* Cartões/branco */
+  --iris-text: #1F2937;     /* Texto escuro */
+  --iris-subtle: #6B7280;   /* Texto secundário */
+  --iris-divider: #E5E7EB;  /* Bordas sutis */
+}
+
+/* ---- Configurando o Tema Angular Material ---- */
+$iris-primary: mat.define-palette(mat.$orange-palette, 600, 500, 700);
+$iris-accent: mat.define-palette(mat.$blue-palette, 600);
+$iris-warn: mat.define-palette(mat.$red-palette);
+
+/* Tema com Angular Material */
+$iris-theme: mat.define-light-theme((
+  color: (
+    primary: $iris-primary,
+    accent: $iris-accent,
+    warn: $iris-warn,
+  ),
+));
+
+/* Aplicar o tema no Angular Material */
+@include mat.all-component-themes($iris-theme);
+
+/* ---- Fontes (Inter e Poppins) ---- */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@600;700&display=swap');
 
-/* ---- Paleta inspirada na home IRIS (ajuste fino se quiser) ---- */
-:root{
-  --iris-primary: #F36C21; /* laranja principal (CTA) */
-  --iris-primary-strong: #E65E10; /* hover */
-  --iris-outline: #F36C21; /* borda CTA outlined */
-  --iris-bg: #FFF7F0;       /* fundo hero pêssego claro */
-  --iris-surface: #FFFFFF;  /* cartões/branco */
-  --iris-text: #1F2937;     /* cinza-azulado escuro para texto */
-  --iris-subtle: #6B7280;   /* texto secundário */
-  --iris-divider: #E5E7EB;  /* bordas sutis */
-}
-
-html, body { height: 100%; }
-body {
+html, body {
+  height: 100%;
   margin: 0;
+  font-family: 'Inter', sans-serif;
   background: var(--iris-bg);
   color: var(--iris-text);
-  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
 }
 
-/* ---- Angular Material - ajustes rápidos ---- */
-.mat-mdc-card { background: var(--iris-surface); color: var(--iris-text); border: 1px solid var(--iris-divider); border-radius: 14px; }
-.mdc-button--raised.mat-primary { background: var(--iris-primary) !important; color: #fff !important; }
-.mdc-button--raised.mat-primary:hover { background: var(--iris-primary-strong) !important; }
-.mdc-button--outlined { border-color: var(--iris-outline) !important; color: var(--iris-outline) !important; }
-.mdc-fab, .mdc-button { font-weight: 600; }
+/* ---- Ajustes nos botões e cards do Material ---- */
+.mat-mdc-card {
+  background: var(--iris-surface);
+  color: var(--iris-text);
+  border: 1px solid var(--iris-divider);
+  border-radius: 14px;
+}
 
-.mat-mdc-form-field { --mdc-outlined-text-field-caret-color: var(--iris-primary); }
-.mat-mdc-form-field .mdc-notched-outline__leading,
-.mat-mdc-form-field .mdc-notched-outline__notch,
-.mat-mdc-form-field .mdc-notched-outline__trailing { border-color: var(--iris-divider) !important; }
+.mdc-button--raised.mat-primary {
+  background: var(--iris-primary) !important;
+  color: #fff !important;
+}
 
-/* Barra de progresso (loading global) laranja */
-.mdc-linear-progress__buffer-bar, .mdc-linear-progress__bar-inner { background: var(--iris-primary) !important; }
+.mdc-button--raised.mat-primary:hover {
+  background: var(--iris-primary-strong) !important;
+}
 
-/* Containers & utilitários */
-.container { max-width: 1200px; margin: 0 auto; padding: 16px; }
-.hero-title { font: 700 36px/1.15 Poppins, Inter, sans-serif; letter-spacing:.2px; margin: 0 0 6px; }
-.subtle { color: var(--iris-subtle); }
+.mdc-button--outlined {
+  border-color: var(--iris-outline) !important;
+  color: var(--iris-outline) !important;
+}
 
-/* Tabela mais elegante */
-table.mat-mdc-table .mdc-data-table__row { height: 52px; }
-th.mat-mdc-header-cell { font-weight: 700; }
+.mdc-fab, .mdc-button {
+  font-weight: 600;
+}
+
+/* Barra de progresso (loading global) */
+.mdc-linear-progress__buffer-bar,
+.mdc-linear-progress__bar-inner {
+  background: var(--iris-primary) !important;
+}
+
+/* Containers e utilitários */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.hero-title {
+  font: 700 36px/1.15 Poppins, Inter, sans-serif;
+  letter-spacing: .2px;
+  margin: 0 0 6px;
+}
+
+.subtle {
+  color: var(--iris-subtle);
+}
+
+/* ---- Tabela mais elegante e com alta densidade ---- */
+table.mat-mdc-table .mdc-data-table__row {
+  height: 52px;
+}
+
+th.mat-mdc-header-cell {
+  font-weight: 700;
+}
+
+/* ---- Responsividade para telas pequenas (≤ 768px) ---- */
+@media (max-width: 768px) {
+  .container {
+    padding: 12px;
+  }
+
+  .hero-title {
+    font-size: 28px;
+    line-height: 1.2;
+  }
+
+  /* Barra de progresso */
+  .topbar {
+    height: 4px;
+  }
+
+  .hero-wrap {
+    padding: 18px 0 6px;
+  }
+
+  .hero-card {
+    padding: 16px;
+    font-size: 16px;
+  }
+
+  .mat-card {
+    margin-top: 12px;
+    padding: 16px;
+  }
+
+  .mat-mdc-table .mdc-data-table__row {
+    height: 44px;
+  }
+
+  table.mat-mdc-table {
+    font-size: 14px;
+  }
+}

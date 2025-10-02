@@ -1,0 +1,17 @@
+/* Header responsivo para telas pequenas (≤768px) */
+@media (max-width: 768px) {
+  .row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .nav {
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  .brand img {
+    height: 24px; /* Ajusta o tamanho do logo */
+  }
+}

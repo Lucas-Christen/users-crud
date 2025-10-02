@@ -20,13 +20,14 @@ import { RouterModule } from '@angular/router';
         <a mat-stroked-button color="primary" href="https://www.sistemairis.com.br/" target="_blank" rel="noopener">
           Área do cliente
         </a>
-        <button mat-raised-button color="primary" (click)="openCTA()">
-          <mat-icon class="ms">play_circle</mat-icon> Solicitar apresentação
+        <button mat-raised-button color="primary" (click)="openCTA()" aria-label="Solicitar apresentação">
+          <mat-icon class="ms" aria-hidden="true">play_circle</mat-icon> Solicitar apresentação
         </button>
       </nav>
     </div>
   </mat-toolbar>
   `,
+  
   styles: [`
     .hdr{
       background: #fff; color: var(--iris-text);
