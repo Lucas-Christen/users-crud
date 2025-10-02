@@ -4,7 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 
-// Interface para os dados que o diálogo receberá
+
 export interface ConfirmDialogData {
   title: string;
   message: string;
@@ -24,12 +24,10 @@ export class ConfirmDialogComponent {
   ) {}
 
   onConfirm(): void {
-    // Fecha o diálogo e retorna 'true' para quem o chamou
     this.dialogRef.close(true);
   }
 
   onDismiss(): void {
-    // Fecha o diálogo e retorna 'false'
     this.dialogRef.close(false);
   }
 }

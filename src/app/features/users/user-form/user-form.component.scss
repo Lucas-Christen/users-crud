@@ -3,13 +3,11 @@
   align-items: center;
   gap: 16px;
   width: 100%;
-  
-  /* CORREÇÃO: Adiciona 16px de espaçamento vertical (acima e abaixo) */
   padding: 16px 0;
 }
 
 .fields-wrapper {
-  /* Esta parte faz os campos de input crescerem para ocupar o espaço */
+
   flex-grow: 1; 
   display: flex;
   gap: 16px;
@@ -21,7 +19,7 @@
 }
 
 .actions {
-  /* Impede que os botões encolham e os mantém à direita */
+
   flex-shrink: 0; 
   display: flex;
   gap: 8px;

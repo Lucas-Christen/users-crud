@@ -7,7 +7,7 @@ import { User } from '../models/user.model';
   providedIn: 'root'
 })
 export class UsersService {
-  private baseUrl = '/api/users';  // URL da API
+  private baseUrl = '/api/users'; 
 
   constructor(private http: HttpClient) {}
 

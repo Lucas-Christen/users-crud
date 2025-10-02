@@ -41,11 +41,8 @@ export class UsersListComponent implements OnInit, OnDestroy {
   @ViewChild('searchInput') searchInput!: ElementRef<HTMLInputElement>;
 
   constructor(private api: UsersService, private toast: MatSnackBar, public dialog: MatDialog) {
-    // CORREÇÃO: Adicionada a lógica para filtrar por idade
     this.dataSource.filterPredicate = (data: User, filter: string) => {
       const f = filter.trim().toLowerCase();
-      
-      // Converte a idade para string para a busca funcionar (se a idade existir)
       const ageAsString = data.age ? data.age.toString() : '';
 
       return (

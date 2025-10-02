@@ -1,4 +1,4 @@
-/* Header responsivo para telas pequenas (≤768px) */
+
 @media (max-width: 768px) {
   .row {
     flex-direction: column;
@@ -12,6 +12,6 @@
   }
 
   .brand img {
-    height: 24px; /* Ajusta o tamanho do logo */
+    height: 24px; 
   }
 }
