@@ -1,4 +1,4 @@
-/* Hero com gradiente pêssego */
+/* Estilos existentes */
 .hero-wrap{
   background: radial-gradient(1200px 600px at 20% 0%, #FFEFE1 0%, rgba(255,239,225,0.8) 60%, transparent 100%);
   padding: 28px 0 8px;
@@ -10,38 +10,67 @@
   padding: 20px 24px;
   box-shadow: 0 10px 25px rgba(0,0,0,.06);
 }
-
-/* Layout da listagem */
 .toolbar {
   display: flex;
   gap: 12px;
   align-items: center;
   margin-bottom: 12px;
-  flex-wrap: wrap; /* Permite quebrar a linha em telas menores */
-  
-  .search { 
-    flex: 1; 
-    min-width: 200px; /* Define uma largura mínima para a busca */
-  }
-
-  /* CORREÇÃO: Impede o botão de encolher */
-  button {
-    flex-shrink: 0;
-  }
+  flex-wrap: wrap;
+  .search { flex: 1; min-width: 200px; }
+  button { flex-shrink: 0; }
 }
 .create-card { border: 1px dashed var(--iris-divider); }
 .full { width:100%; }
 .table-wrap { overflow:auto; }
 .loading { display:flex; gap:10px; align-items:center; padding:8px 0; color: var(--iris-subtle); }
-.empty { text-align:center; color: var(--iris-subtle); }
 
-/* Tabela mais densa e legível no tema claro */
-table.mat-mdc-table .mdc-data-table__row { height: 52px; }
-th.mat-mdc-header-cell { font-weight:700; }
+/*
+======================================================
+  CORREÇÕES E MELHORIAS VISUAIS (VERSÃO CORRIGIDA)
+======================================================
+*/
 
-/* CORREÇÃO: Define uma largura para a coluna de ações para os ícones caberem */
-.mat-column-actions {
-  width: 120px;
+/* MELHORIA 1: Adiciona espaçamento acima do card da tabela */
+:host {
+  display: block;
+  padding-top: 24px;
+}
+
+/* MELHORIA 2: Adiciona efeito de hover nas linhas da tabela */
+.mat-mdc-table .mat-mdc-row:hover {
+  background-color: #f5f5f5; /* Um cinza bem claro */
+}
+
+/* MELHORIA 3: Alinha colunas de número e ações à direita */
+.mat-column-age, .mat-column-actions {
+  text-align: right;
+
+  .mat-sort-header-container {
+    justify-content: flex-end;
+  }
+}
+
+/* MELHORIA 4: Estiliza a mensagem de tabela vazia */
+.empty-state {
+  text-align: center;
+  padding: 48px 24px;
+  border: 1px dashed var(--iris-divider);
+  background-color: #fdfdfd;
+  margin: 16px 0;
+
+  mat-icon {
+    font-size: 56px;
+    width: 56px;
+    height: 56px;
+    color: var(--iris-divider);
+    margin-bottom: 16px;
+  }
+
+  h3 {
+    margin: 0 0 4px;
+    font-size: 18px;
+    font-weight: 600;
+  }
 }
 
 
@@ -52,24 +81,38 @@ th.mat-mdc-header-cell { font-weight:700; }
     align-items: stretch;
     width: 100%;
   }
+  .hero-wrap { padding: 18px 0; }
+  .hero-card { padding: 16px; }
+  table.mat-mdc-table { font-size: 14px; }
+  .mat-mdc-table .mdc-data-table__row { height: 44px; }
+  .table-wrap { overflow-x: auto; }
+}
+/* =============================================================
+   REFINAMENTOS VISUAIS FINAIS
+   =============================================================
+*/
+
+/* 1. Estiliza o cabeçalho da tabela para destacá-lo */
+.mat-mdc-header-row {
+  background-color: #ff9e4f; /* Um cinza claro e sutil */
+}
+
+/* Arredonda os cantos do cabeçalho */
+.mat-mdc-table thead, .mat-mdc-header-row {
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+/* 2. Adiciona animação de hover nos ícones de ação */
+.mat-column-actions button[mat-icon-button] {
+  transition: transform 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+.mat-column-actions button[mat-icon-button]:hover {
+  transform: scale(1.2); /* Aumenta o ícone em 20% */
   
-  .hero-wrap {
-    padding: 18px 0;
-  }
-
-  .hero-card {
-    padding: 16px;
-  }
-
-  .mat-mdc-table .mdc-data-table__row {
-    height: 44px;  /* Aumentar densidade da tabela */
-  }
-
-  table.mat-mdc-table {
-    font-size: 14px;  /* Texto menor no mobile */
-  }
-
-  .table-wrap {
-    overflow-x: auto;
+  // Aplica a cor primária do tema ao ícone de edição
+  mat-icon:not([color="warn"]) {
+    color: var(--iris-primary);
   }
 }

@@ -1,0 +1,22 @@
+.header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--iris-primary);
+
+  h2 {
+    color: var(--iris-text);
+  }
+  
+  mat-icon {
+    color: var(--iris-primary);
+  }
+}
+
+p {
+  color: var(--iris-subtle);
+}
+
+[mat-dialog-actions] {
+  padding: 0 24px 20px;
+}

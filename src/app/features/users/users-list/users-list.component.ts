@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, signal, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, signal, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UsersService } from '../../../core/services/users.service';
 import { User } from '../../../core/models/user.model';
@@ -9,6 +9,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { Subject, takeUntil } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialog/confirm-dialog.component';
+
 
 @Component({
   selector: 'app-users-list',
@@ -17,55 +21,51 @@ import { MatSort } from '@angular/material/sort';
   templateUrl: './users-list.component.html',
   styleUrls: ['./users-list.component.scss']
 })
-export class UsersListComponent implements OnInit {
-  // CORREÇÃO: Adicionada a coluna 'age'
+export class UsersListComponent implements OnInit, OnDestroy {
   displayedColumns = ['name', 'email', 'age', 'actions'];
-
-  // datasource com sort/paginator/filter embutidos
   dataSource = new MatTableDataSource<User>([]);
-
-  // busca
   search = new FormControl('');
 
-  // estados
   creating = signal<boolean>(false);
   editingId = signal<number | null>(null);
   loading = signal<boolean>(false);
 
-  // CORREÇÃO: Uso de setters para garantir que paginator e sort sejam atribuídos
-  // assim que estiverem disponíveis no DOM, resolvendo o problema do *ngIf.
+  private destroy$ = new Subject<void>();
+
   @ViewChild(MatPaginator) set paginator(paginator: MatPaginator) {
-    if (paginator) {
-      this.dataSource.paginator = paginator;
-    }
+    if (paginator) { this.dataSource.paginator = paginator; }
   }
-
   @ViewChild(MatSort) set sort(sort: MatSort) {
-    if (sort) {
-      this.dataSource.sort = sort;
-    }
+    if (sort) { this.dataSource.sort = sort; }
   }
-
   @ViewChild('searchInput') searchInput!: ElementRef<HTMLInputElement>;
 
-
-  constructor(private api: UsersService, private toast: MatSnackBar) {
-    // filtro por nome OU email
+  constructor(private api: UsersService, private toast: MatSnackBar, public dialog: MatDialog) {
+    // CORREÇÃO: Adicionada a lógica para filtrar por idade
     this.dataSource.filterPredicate = (data: User, filter: string) => {
       const f = filter.trim().toLowerCase();
+      
+      // Converte a idade para string para a busca funcionar (se a idade existir)
+      const ageAsString = data.age ? data.age.toString() : '';
+
       return (
         data.name?.toLowerCase().includes(f) ||
-        data.email?.toLowerCase().includes(f)
+        data.email?.toLowerCase().includes(f) ||
+        ageAsString.includes(f)
       );
     };
   }
 
   ngOnInit(): void {
-    // reage ao campo de busca
-    this.search.valueChanges.subscribe(v => {
+    this.search.valueChanges.pipe(takeUntil(this.destroy$)).subscribe(v => {
       this.applyFilter(v);
     });
     this.load();
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   applyFilter(filterValue: string | null) {
@@ -77,15 +77,12 @@ export class UsersListComponent implements OnInit {
 
   load() {
     this.loading.set(true);
-    this.api.list().subscribe({
+    this.api.list().pipe(takeUntil(this.destroy$)).subscribe({
       next: users => {
         this.dataSource.data = users;
         this.loading.set(false);
       },
-      error: () => {
-        this.toast.open('Falha ao carregar usuários', 'Fechar', { duration: 3000 });
-        this.loading.set(false);
-      }
+      error: () => this.loading.set(false)
     });
   }
 
@@ -94,55 +91,60 @@ export class UsersListComponent implements OnInit {
 
   createUser(user: User) {
     this.loading.set(true);
-    this.api.create(user).subscribe({
+    this.api.create(user).pipe(takeUntil(this.destroy$)).subscribe({
       next: created => {
         this.dataSource.data = [created, ...this.dataSource.data];
         this.creating.set(false);
-        this.loading.set(false);
         this.toast.open('Usuário criado', 'OK', { duration: 2000 });
       },
-      error: () => {
-        this.loading.set(false);
-        this.toast.open('Erro ao criar usuário', 'Fechar', { duration: 3000 });
-      }
+      error: () => this.toast.open('Erro ao criar usuário', 'Fechar', { duration: 3000 }),
+      complete: () => this.loading.set(false)
     });
   }
 
   startEdit(id: number) { this.editingId.set(id); }
   cancelEdit() { this.editingId.set(null); }
-
+  
   saveEdit(id: number, partial: User) {
     const original = this.dataSource.data.find(u => u.id === id);
     if (!original) return;
 
     const updated: User = { ...original, ...partial, id };
     this.loading.set(true);
-    this.api.update(updated).subscribe({
+    this.api.update(updated).pipe(takeUntil(this.destroy$)).subscribe({
       next: up => {
-        this.dataSource.data = this.dataSource.data.map(u => u.id === id ? up : u);
-        this.editingId.set(null);
-        this.loading.set(false);
+        const index = this.dataSource.data.findIndex(u => u.id === id);
+        const newData = [...this.dataSource.data];
+        newData[index] = up;
+        this.dataSource.data = newData;
+        this.cancelEdit();
         this.toast.open('Usuário atualizado', 'OK', { duration: 2000 });
       },
-      error: () => {
-        this.loading.set(false);
-        this.toast.open('Erro ao atualizar', 'Fechar', { duration: 3000 });
-      }
+      error: () => this.toast.open('Erro ao atualizar', 'Fechar', { duration: 3000 }),
+      complete: () => this.loading.set(false)
     });
   }
 
-  delete(id: number) {
-    if (!confirm('Excluir este usuário?')) return;
-    this.loading.set(true);
-    this.api.delete(id).subscribe({
-      next: () => {
-        this.dataSource.data = this.dataSource.data.filter(u => u.id !== id);
-        this.loading.set(false);
-        this.toast.open('Usuário excluído', 'OK', { duration: 2000 });
-      },
-      error: () => {
-        this.loading.set(false);
-        this.toast.open('Erro ao excluir', 'Fechar', { duration: 3000 });
+  delete(id: number, name: string): void {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '400px',
+      data: {
+        title: 'Confirmar Exclusão',
+        message: `Você tem certeza que deseja excluir o usuário "${name}"? Esta ação não pode ser desfeita.`
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(confirmed => {
+      if (confirmed) {
+        this.loading.set(true);
+        this.api.delete(id).pipe(takeUntil(this.destroy$)).subscribe({
+          next: () => {
+            this.dataSource.data = this.dataSource.data.filter(u => u.id !== id);
+            this.toast.open('Usuário excluído com sucesso!', 'OK', { duration: 3000 });
+          },
+          error: () => this.toast.open('Erro ao excluir usuário.', 'Fechar', { duration: 3000 }),
+          complete: () => this.loading.set(false)
+        });
       }
     });
   }
