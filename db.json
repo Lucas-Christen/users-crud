@@ -20,15 +20,165 @@
     },
     {
       "id": "4",
-      "name": "Lucas Fernandes Christen",
-      "email": "lucaschristen@alunos.utfpr.edu.br",
+      "name": "Grace Hopper",
+      "email": "grace@cobol.dev",
+      "age": 79
+    },
+    {
+      "id": "5",
+      "name": "Margaret Hamilton",
+      "email": "margaret@apollo.org",
+      "age": 33
+    },
+    {
+      "id": "6",
+      "name": "Tim Berners-Lee",
+      "email": "tim@w3.org",
+      "age": 34
+    },
+    {
+      "id": "7",
+      "name": "Dennis Ritchie",
+      "email": "dennis@c.lang",
+      "age": 42
+    },
+    {
+      "id": "8",
+      "name": "Relâmpago McQueen",
+      "email": "lightning@pistoncup.com",
+      "age": null
+    },
+    {
+      "id": "9",
+      "name": "Capitão Jack Sparrow",
+      "email": "captain@pearl.sea",
+      "age": 39
+    },
+    {
+      "id": "10",
+      "name": "Thor Odinson",
+      "email": "thor@asgard.org",
+      "age": 1500
+    },
+    {
+      "id": "11",
+      "name": "Peter Parker (Homem-Aranha)",
+      "email": "peter.parker@dailybugle.net",
+      "age": 22
+    },
+    {
+      "id": "12",
+      "name": "Tony Stark (Homem de Ferro)",
+      "email": "tony@stark.industries",
+      "age": 53
+    },
+    {
+      "id": "13",
+      "name": "Diana Prince (Mulher-Maravilha)",
+      "email": "diana@themyscira.gov",
+      "age": 5000
+    },
+    {
+      "id": "14",
+      "name": "Harry Potter",
+      "email": "h.potter@hogwarts.edu",
+      "age": 17
+    },
+    {
+      "id": "15",
+      "name": "Darth Vader",
+      "email": "vader@darkside.gov",
+      "age": 45
+    },
+    {
+      "id": "16",
+      "name": "Sherlock Holmes",
+      "email": "sherlock@221b.baker",
+      "age": 35
+    },
+    {
+      "id": "18",
+      "name": "Daenerys Targaryen",
+      "email": "dany@targaryen.westeros",
       "age": 24
     },
     {
-      "id": "ce82",
-      "name": "teste",
-      "email": "12dl@gmail.com",
+      "id": "19",
+      "name": "Walter White",
+      "email": "heisenberg@lospollos.com",
+      "age": 52
+    },
+    {
+      "id": "20",
+      "name": "Geralt of Rivia",
+      "email": "geralt@kaermorhen.witcher",
+      "age": 95
+    },
+    {
+      "id": "21",
+      "name": "Neo",
+      "email": "neo@the.matrix",
+      "age": 37
+    },
+    {
+      "id": "22",
+      "name": "Lara Croft",
+      "email": "lara@croft.manor",
+      "age": 21
+    },
+    {
+      "id": "23",
+      "name": "Goku",
+      "email": "goku@capsulecorp.jp",
+      "age": 43
+    },
+    {
+      "id": "24",
+      "name": "Mario",
+      "email": "mario@mushroom.kingdom",
+      "age": 25
+    },
+    {
+      "id": "25",
+      "name": "Michael Scott",
+      "email": "michael@dundermifflin.com",
+      "age": 45
+    },
+    {
+      "id": "26",
+      "name": "Marie Curie",
+      "email": "marie@radium.sci",
+      "age": 66
+    },
+    {
+      "id": "27",
+      "name": "Nikola Tesla",
+      "email": "nikola@alternating.current",
+      "age": 86
+    },
+    {
+      "id": "28",
+      "name": "Leonardo da Vinci",
+      "email": "leo@renaissance.art",
+      "age": 67
+    },
+    {
+      "id": "29",
+      "name": "Albert Einstein",
+      "email": "albert@relativity.de",
+      "age": 76
+    },
+    {
+      "id": "30",
+      "name": "Satoshi Nakamoto",
+      "email": "satoshi@bitcoin.org",
       "age": null
+    },
+    {
+      "id": "31",
+      "name": "Steve Wozniak",
+      "email": "woz@apple.com",
+      "age": 26
     }
   ]
 }

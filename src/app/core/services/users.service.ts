@@ -7,7 +7,7 @@ import { User } from '../models/user.model';
   providedIn: 'root'
 })
 export class UsersService {
-  private baseUrl = '/api/users'; 
+  private baseUrl = 'https://my-json-server.typicode.com/lucas-christen/users-crud/users'; 
 
   constructor(private http: HttpClient) {}
 
