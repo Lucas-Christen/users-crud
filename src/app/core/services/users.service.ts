@@ -7,7 +7,7 @@ import { User } from '../models/user.model';
   providedIn: 'root'
 })
 export class UsersService {
-  private baseUrl = 'https://my-json-server.typicode.com/lucas-christen/users-crud/users'; 
+  private baseUrl = 'https://68ded03a898434f4135618f1.mockapi.io/users'; 
 
   constructor(private http: HttpClient) {}
 

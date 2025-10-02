@@ -1,52 +1,95 @@
-.hero-wrap{
-  background: radial-gradient(1200px 600px at 20% 0%, #FFEFE1 0%, rgba(255,239,225,0.8) 60%, transparent 100%);
+.hero-wrap {
+  background: radial-gradient(1200px 600px at 20% 0%, #ffd4bb 0%, rgba(255, 239, 225, 0.8) 60%, transparent 100%);
   padding: 28px 0 8px;
 }
-.hero-card{
-  background: #fff;
+
+.hero-card {
+  background: #ffffff;
   border: 1px solid var(--iris-divider);
   border-radius: 16px;
   padding: 20px 24px;
-  box-shadow: 0 10px 25px rgba(0,0,0,.06);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, .06);
 }
+
 .toolbar {
   display: flex;
   gap: 12px;
   align-items: center;
   margin-bottom: 12px;
   flex-wrap: wrap;
-  .search { flex: 1; min-width: 200px; }
-  button { flex-shrink: 0; }
+  .search {
+    flex: 1;
+    min-width: 200px;
+  }
+  button {
+    flex-shrink: 0;
+  }
 }
-.create-card { border: 1px dashed var(--iris-divider); }
-.full { width:100%; }
-.table-wrap { overflow:auto; }
-.loading { display:flex; gap:10px; align-items:center; padding:8px 0; color: var(--iris-subtle); }
+
+.create-card {
+  border: 1px dashed var(--iris-divider);
+}
+
+.full {
+  width: 100%;
+}
+
+.table-wrap {
+  overflow: auto;
+  border: 1px solid var(--iris-divider); /* Borda externa da tabela */
+  border-radius: 8px; /* Arredonda as bordas da tabela */
+}
+
+.loading {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 8px 0;
+  color: var(--iris-subtle);
+}
+
 :host {
   display: block;
   padding-top: 24px;
 }
 
+// ===== NOVOS ESTILOS PARA GRADE E CENTRALIZAÇÃO =====
 
-.mat-mdc-table .mat-mdc-row:hover {
-  background-color: #f5f5f5; 
-}
+.mat-mdc-table {
+  // Remove a sombra padrão para usar nossa borda
+  --mat-elevation-z1: 0;
 
+  th.mat-mdc-header-cell,
+  td.mat-mdc-cell {
+    // Adiciona bordas laterais para criar colunas
+    border-left: 1px solid var(--iris-divider);
+    text-align: center;
+    padding: 0 16px;
+  }
 
-.mat-column-age, .mat-column-actions {
-  text-align: right;
+  // Remove a borda da primeira célula para não duplicar
+  th.mat-mdc-header-cell:first-of-type,
+  td.mat-mdc-cell:first-of-type {
+    border-left: none;
+  }
 
+  // Centraliza o conteúdo dos cabeçalhos com ordenação
   .mat-sort-header-container {
-    justify-content: flex-end;
+    justify-content: center;
   }
 }
 
+// FIM DOS NOVOS ESTILOS
+
+.mat-mdc-table .mat-mdc-row:hover {
+  background-color: rgb(233, 228, 225);
+}
 
 .empty-state {
   text-align: center;
   padding: 48px 24px;
   border: 1px dashed var(--iris-divider);
-  background-color: #fdfdfd;
+  background-color: #ffcfa8;
   margin: 16px 0;
 
   mat-icon {
@@ -64,27 +107,31 @@
   }
 }
 
-
-@media (max-width: 768px){
+@media (max-width: 768px) {
   .toolbar {
     flex-direction: column;
     align-items: stretch;
     width: 100%;
   }
-  .hero-wrap { padding: 18px 0; }
-  .hero-card { padding: 16px; }
-  table.mat-mdc-table { font-size: 14px; }
-  .mat-mdc-table .mdc-data-table__row { height: 44px; }
-  .table-wrap { overflow-x: auto; }
+  .hero-wrap {
+    padding: 18px 0;
+  }
+  .hero-card {
+    padding: 16px;
+  }
+  table.mat-mdc-table {
+    font-size: 14px;
+  }
+  .mat-mdc-table .mdc-data-table__row {
+    height: 44px;
+  }
+  .table-wrap {
+    overflow-x: auto;
+  }
 }
 
 .mat-mdc-header-row {
-  background-color: #ff9e4f; 
-}
-
-.mat-mdc-table thead, .mat-mdc-header-row {
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
+  background-color: #ff9736; // Cor mais suave para o cabeçalho
 }
 
 .mat-column-actions button[mat-icon-button] {
@@ -92,8 +139,8 @@
 }
 
 .mat-column-actions button[mat-icon-button]:hover {
-  transform: scale(1.2); 
-  
+  transform: scale(1.2);
+
   mat-icon:not([color="warn"]) {
     color: var(--iris-primary);
   }

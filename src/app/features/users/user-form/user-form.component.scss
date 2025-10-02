@@ -25,3 +25,15 @@
   gap: 8px;
   align-items: center;
 }
+@media (max-width: 768px) {
+  .form-container,
+  .fields-wrapper {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .actions {
+    padding-top: 8px;
+    justify-content: flex-end;
+  }
+}
