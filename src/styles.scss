@@ -1,1 +1,46 @@
-/* You can add global styles to this file, and also import other style files */
+/* ---- Fonts ---- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@600;700&display=swap');
+
+/* ---- Paleta inspirada na home IRIS (ajuste fino se quiser) ---- */
+:root{
+  --iris-primary: #F36C21; /* laranja principal (CTA) */
+  --iris-primary-strong: #E65E10; /* hover */
+  --iris-outline: #F36C21; /* borda CTA outlined */
+  --iris-bg: #FFF7F0;       /* fundo hero pêssego claro */
+  --iris-surface: #FFFFFF;  /* cartões/branco */
+  --iris-text: #1F2937;     /* cinza-azulado escuro para texto */
+  --iris-subtle: #6B7280;   /* texto secundário */
+  --iris-divider: #E5E7EB;  /* bordas sutis */
+}
+
+html, body { height: 100%; }
+body {
+  margin: 0;
+  background: var(--iris-bg);
+  color: var(--iris-text);
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+
+/* ---- Angular Material - ajustes rápidos ---- */
+.mat-mdc-card { background: var(--iris-surface); color: var(--iris-text); border: 1px solid var(--iris-divider); border-radius: 14px; }
+.mdc-button--raised.mat-primary { background: var(--iris-primary) !important; color: #fff !important; }
+.mdc-button--raised.mat-primary:hover { background: var(--iris-primary-strong) !important; }
+.mdc-button--outlined { border-color: var(--iris-outline) !important; color: var(--iris-outline) !important; }
+.mdc-fab, .mdc-button { font-weight: 600; }
+
+.mat-mdc-form-field { --mdc-outlined-text-field-caret-color: var(--iris-primary); }
+.mat-mdc-form-field .mdc-notched-outline__leading,
+.mat-mdc-form-field .mdc-notched-outline__notch,
+.mat-mdc-form-field .mdc-notched-outline__trailing { border-color: var(--iris-divider) !important; }
+
+/* Barra de progresso (loading global) laranja */
+.mdc-linear-progress__buffer-bar, .mdc-linear-progress__bar-inner { background: var(--iris-primary) !important; }
+
+/* Containers & utilitários */
+.container { max-width: 1200px; margin: 0 auto; padding: 16px; }
+.hero-title { font: 700 36px/1.15 Poppins, Inter, sans-serif; letter-spacing:.2px; margin: 0 0 6px; }
+.subtle { color: var(--iris-subtle); }
+
+/* Tabela mais elegante */
+table.mat-mdc-table .mdc-data-table__row { height: 52px; }
+th.mat-mdc-header-cell { font-weight: 700; }

@@ -1,0 +1,11 @@
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 200px;
+  gap: 12px;
+  align-items: start;
+}
+.actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}

@@ -1,0 +1,26 @@
+/* Hero com gradiente pêssego */
+.hero-wrap{
+  background: radial-gradient(1200px 600px at 20% 0%, #FFEFE1 0%, rgba(255,239,225,0.8) 60%, transparent 100%);
+  padding: 28px 0 8px;
+}
+.hero-card{
+  background: #fff;
+  border: 1px solid var(--iris-divider);
+  border-radius: 16px;
+  padding: 20px 24px;
+  box-shadow: 0 10px 25px rgba(0,0,0,.06);
+}
+
+/* Layout da listagem */
+.toolbar { display:flex; gap:12px; align-items:center; margin-bottom:12px;
+  .search { flex:1; }
+}
+.create-card { border: 1px dashed var(--iris-divider); }
+.full { width:100%; }
+.table-wrap { overflow:auto; }
+.loading { display:flex; gap:10px; align-items:center; padding:8px 0; color: var(--iris-subtle); }
+.empty { text-align:center; color: var(--iris-subtle); }
+
+/* Tabela mais densa e legível no tema claro */
+table.mat-mdc-table .mdc-data-table__row { height: 52px; }
+th.mat-mdc-header-cell { font-weight:700; }

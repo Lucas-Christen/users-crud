@@ -1,0 +1,28 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "name": "Ada Lovelace",
+      "email": "ada@lovelace.dev",
+      "age": 28
+    },
+    {
+      "id": "2",
+      "name": "Alan Turing",
+      "email": "alan@turing.ai",
+      "age": 41
+    },
+    {
+      "id": "3",
+      "name": "Linus Torvalds",
+      "email": "linus@kernel.org",
+      "age": 30
+    },
+    {
+      "id": "627b",
+      "name": "Lucas Fernandes Christen",
+      "email": "lucaschristen@alunos.utfpr.edu.br",
+      "age": 24
+    }
+  ]
+}

@@ -21,10 +21,8 @@
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
-              {
-                "glob": "**/*",
-                "input": "public"
-              }
+                { "glob": "**/*", "input": "public" },
+                { "glob": "**/*", "input": "src/assets" }
             ],
             "styles": [
               "src/styles.scss"
@@ -61,6 +59,9 @@
         },
         "serve": {
           "builder": "@angular/build:dev-server",
+          "options": {
+            "proxyConfig": "proxy.conf.json"
+          },
           "configurations": {
             "production": {
               "buildTarget": "users-crud:build:production"
