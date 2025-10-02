@@ -19,10 +19,22 @@
       "age": 30
     },
     {
-      "id": "627b",
+      "id": "4",
       "name": "Lucas Fernandes Christen",
       "email": "lucaschristen@alunos.utfpr.edu.br",
       "age": 24
+    },
+    {
+      "id": "90b1",
+      "name": "Jeany",
+      "email": "jeany@alunos.utfpr.edu.br",
+      "age": 24
+    },
+    {
+      "id": "ce82",
+      "name": "teste",
+      "email": "12dl@gmail.com",
+      "age": null
     }
   ]
 }

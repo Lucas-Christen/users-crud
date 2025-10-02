@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, signal } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, signal, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UsersService } from '../../../core/services/users.service';
 import { User } from '../../../core/models/user.model';
@@ -17,9 +17,9 @@ import { MatSort } from '@angular/material/sort';
   templateUrl: './users-list.component.html',
   styleUrls: ['./users-list.component.scss']
 })
-export class UsersListComponent implements OnInit, AfterViewInit {
-  // colunas
-  displayedColumns = ['name', 'email', 'actions'];
+export class UsersListComponent implements OnInit {
+  // CORREÇÃO: Adicionada a coluna 'age'
+  displayedColumns = ['name', 'email', 'age', 'actions'];
 
   // datasource com sort/paginator/filter embutidos
   dataSource = new MatTableDataSource<User>([]);
@@ -32,9 +32,20 @@ export class UsersListComponent implements OnInit, AfterViewInit {
   editingId = signal<number | null>(null);
   loading = signal<boolean>(false);
 
-  // paginator e sort
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
+  // CORREÇÃO: Uso de setters para garantir que paginator e sort sejam atribuídos
+  // assim que estiverem disponíveis no DOM, resolvendo o problema do *ngIf.
+  @ViewChild(MatPaginator) set paginator(paginator: MatPaginator) {
+    if (paginator) {
+      this.dataSource.paginator = paginator;
+    }
+  }
+
+  @ViewChild(MatSort) set sort(sort: MatSort) {
+    if (sort) {
+      this.dataSource.sort = sort;
+    }
+  }
+
   @ViewChild('searchInput') searchInput!: ElementRef<HTMLInputElement>;
 
 
@@ -50,18 +61,18 @@ export class UsersListComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    // reaciona ao campo de busca
+    // reage ao campo de busca
     this.search.valueChanges.subscribe(v => {
-      this.dataSource.filter = (v ?? '').trim().toLowerCase();
-      // resetar para a primeira página quando filtrar
-      if (this.dataSource.paginator) this.dataSource.paginator.firstPage();
+      this.applyFilter(v);
     });
     this.load();
   }
 
-  ngAfterViewInit(): void {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+  applyFilter(filterValue: string | null) {
+    this.dataSource.filter = (filterValue || '').trim().toLowerCase();
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 
   load() {

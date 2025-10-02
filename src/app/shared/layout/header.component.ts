@@ -17,7 +17,7 @@ import { RouterModule } from '@angular/router';
 
       <nav class="nav">
         <a mat-button routerLink="/users">Usuários</a>
-        <a mat-stroked-button color="primary" href="https://www.sistemairis.com.br/" target="_blank" rel="noopener">
+        <a mat-stroked-button color="primary" href="https://atendimento.sistemairis.com.br/Account/Login" target="_blank" rel="noopener">
           Área do cliente
         </a>
         <button mat-raised-button color="primary" (click)="openCTA()" aria-label="Solicitar apresentação">
@@ -42,5 +42,5 @@ import { RouterModule } from '@angular/router';
   `]
 })
 export class HeaderComponent {
-  openCTA(){ window.open('https://www.sistemairis.com.br/', '_blank'); }
+  openCTA(){ window.open('https://www.sistemairis.com.br/solicitar-apresentacao/', '_blank'); }
 }

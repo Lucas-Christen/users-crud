@@ -5,7 +5,6 @@ import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideZonelessChangeDetection } from '@angular/core';
 import { loadingInterceptor } from './core/interceptors/loading.interceptor';
-
 import { httpErrorInterceptor } from './core/interceptors/http-error.interceptor';
 
 export const appConfig: ApplicationConfig = {
@@ -15,12 +14,10 @@ export const appConfig: ApplicationConfig = {
       withFetch(),
       withInterceptors([
         loadingInterceptor,
-        httpErrorInterceptor,
+        httpErrorInterceptor
       ])
     ),
     provideAnimations(),
-    provideZonelessChangeDetection(),
-    provideHttpClient(withFetch(), withInterceptors([loadingInterceptor]))
-
+    provideZonelessChangeDetection()
   ]
 };

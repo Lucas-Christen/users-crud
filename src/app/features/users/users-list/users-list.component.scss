@@ -12,8 +12,22 @@
 }
 
 /* Layout da listagem */
-.toolbar { display:flex; gap:12px; align-items:center; margin-bottom:12px;
-  .search { flex:1; }
+.toolbar {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 12px;
+  flex-wrap: wrap; /* Permite quebrar a linha em telas menores */
+  
+  .search { 
+    flex: 1; 
+    min-width: 200px; /* Define uma largura mínima para a busca */
+  }
+
+  /* CORREÇÃO: Impede o botão de encolher */
+  button {
+    flex-shrink: 0;
+  }
 }
 .create-card { border: 1px dashed var(--iris-divider); }
 .full { width:100%; }
@@ -24,6 +38,12 @@
 /* Tabela mais densa e legível no tema claro */
 table.mat-mdc-table .mdc-data-table__row { height: 52px; }
 th.mat-mdc-header-cell { font-weight:700; }
+
+/* CORREÇÃO: Define uma largura para a coluna de ações para os ícones caberem */
+.mat-column-actions {
+  width: 120px;
+}
+
 
 /* Tabela responsiva (densa no mobile) */
 @media (max-width: 768px){
