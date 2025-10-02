@@ -1,9 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { UsersListComponent } from './users-list.component';
 import { UsersService } from '../../../core/services/users.service';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { MaterialImports } from '../../../material.imports';
 import { of } from 'rxjs';
+import { provideZonelessChangeDetection } from '@angular/core';
+import { provideAnimations } from '@angular/platform-browser/animations';
 
 describe('UsersListComponent', () => {
   let comp: UsersListComponent;
@@ -12,8 +15,14 @@ describe('UsersListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [UsersListComponent, HttpClientTestingModule, MaterialImports],
-      providers: [UsersService]
+      imports: [UsersListComponent, MaterialImports],
+      providers: [
+        provideZonelessChangeDetection(),
+        provideAnimations(),
+        provideHttpClient(),
+        provideHttpClientTesting(),
+        UsersService
+      ]
     }).compileComponents();
 
     fix = TestBed.createComponent(UsersListComponent);

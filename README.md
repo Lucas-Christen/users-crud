@@ -1,59 +1,209 @@
-# UsersCrud
+# 🎯 Sistema IRIS - Gestão de Usuários
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.3.
+Aplicação Angular para gerenciamento de usuários com CRUD completo, desenvolvida como parte do desafio técnico.
 
-## Development server
+![Angular](https://img.shields.io/badge/Angular-20.3-red)
+![Material](https://img.shields.io/badge/Material-20.2-blue)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.9-blue)
 
-To start a local development server, run:
+## 📋 Funcionalidades
 
+### ✅ Requisitos Implementados
+
+- **Listagem de Usuários**
+  - Tabela responsiva com Nome, E-mail e Ações
+  - Edição inline diretamente na tabela
+  - Exclusão com confirmação
+  - Campo de busca por nome ou e-mail
+  - Paginação (5, 10 ou 20 itens por página)
+  - Ordenação por colunas
+
+- **Formulário de Adição/Edição**
+  - Formulário reativo com validações em tempo real
+  - **Nome**: obrigatório, mínimo 3 caracteres
+  - **E-mail**: obrigatório, formato válido
+  - **Idade**: opcional, mínimo 18 anos
+  - Mensagens de erro contextuais
+  - Botão desabilitado enquanto formulário inválido
+
+- **API REST**
+  - GET - Listar todos os usuários
+  - POST - Adicionar novo usuário
+  - PUT - Atualizar usuário existente
+  - DELETE - Excluir usuário
+
+### 🎁 Funcionalidades Extra
+
+- **Loading Global**: Barra de progresso durante requisições HTTP
+- **Tratamento de Erros**: Interceptor com mensagens amigáveis via Snackbar
+- **Design Personalizado**: Tema customizado com paleta de cores IRIS
+- **Responsividade**: Interface adaptada para desktop, tablet e mobile
+- **Testes Unitários**: Cobertura de componentes e serviços
+- **Arquitetura Moderna**: 
+  - Standalone Components
+  - Zoneless Change Detection
+  - Signals API
+  - Server-Side Rendering (SSR)
+
+## 🚀 Instalação e Execução
+
+### Pré-requisitos
+
+- Node.js (v18 ou superior)
+- npm ou yarn
+
+### Passo a Passo
+
+1. **Clone o repositório**
 ```bash
-ng serve
+git clone <seu-repositorio>
+cd users-crud
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
+2. **Instale as dependências**
 ```bash
-ng generate component component-name
+npm install
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
+3. **Inicie o servidor JSON (API simulada)**
 ```bash
-ng generate --help
+npm run server
+```
+O servidor estará disponível em `http://localhost:3000`
+
+4. **Em outro terminal, inicie a aplicação Angular**
+```bash
+npm start
+```
+A aplicação estará disponível em `http://localhost:4200`
+
+5. **Ou execute ambos simultaneamente**
+```bash
+npm run dev
 ```
 
-## Building
-
-To build the project run:
+## 🧪 Executando Testes
 
 ```bash
-ng build
+# Testes unitários
+npm test
+
+# Build de produção
+npm run build
+
+# Servir build SSR
+npm run serve:ssr:users-crud
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## 📂 Estrutura do Projeto
 
-## Running unit tests
+```
+src/
+├── app/
+│   ├── core/                    # Funcionalidades essenciais
+│   │   ├── guards/              # Route guards
+│   │   ├── interceptors/        # HTTP interceptors
+│   │   ├── models/              # Interfaces e tipos
+│   │   └── services/            # Serviços (API, loading)
+│   ├── features/                # Módulos de funcionalidades
+│   │   └── users/               # Feature de usuários
+│   │       ├── user-form/       # Formulário reativo
+│   │       └── users-list/      # Listagem e tabela
+│   ├── shared/                  # Componentes compartilhados
+│   │   └── layout/              # Header, footer, etc.
+│   └── material.imports.ts      # Importações do Material
+├── assets/                      # Imagens e recursos estáticos
+├── styles.scss                  # Estilos globais
+└── theme.scss                   # Tema Angular Material
+```
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+## 🎨 Tecnologias Utilizadas
 
+- **Angular 20.3** - Framework principal
+- **Angular Material 20.2** - Componentes UI
+- **RxJS 7.8** - Programação reativa
+- **TypeScript 5.9** - Tipagem estática
+- **json-server 1.0** - API REST simulada
+- **Jasmine + Karma** - Testes unitários
+- **SCSS** - Estilos
+
+## 🎯 Destaques Técnicos
+
+### Arquitetura
+- **Standalone Components**: Sem NgModules, componentes independentes
+- **Zoneless**: Melhor performance sem Zone.js
+- **Signals**: API reativa moderna do Angular
+- **Lazy Loading**: Componentes carregados sob demanda
+
+### Padrões Implementados
+- **Separation of Concerns**: Core, Features, Shared
+- **Service Layer**: Comunicação HTTP centralizada
+- **Reactive Forms**: Validações robustas e reativas
+- **Interceptors**: Loading e error handling globais
+- **Guards**: Proteção de rotas (preparado para autenticação)
+
+### Performance
+- **OnPush Strategy**: Detecção de mudanças otimizada
+- **Lazy Loading**: Carregamento sob demanda
+- **Server-Side Rendering**: SEO e primeira renderização rápida
+
+## 📱 Responsividade
+
+A aplicação é totalmente responsiva, com breakpoints em:
+- **Desktop**: ≥ 1200px
+- **Tablet**: 768px - 1199px
+- **Mobile**: < 768px
+
+## 🔒 Segurança
+
+- Validações no frontend e preparado para validações no backend
+- Proteção XSS através do DomSanitizer do Angular
+- Guard preparado para autenticação (pode ser expandido)
+
+## 📄 API Endpoints
+
+A API simulada (json-server) disponibiliza:
+
+```
+GET    /api/users       - Lista todos os usuários
+POST   /api/users       - Cria novo usuário
+PUT    /api/users/:id   - Atualiza usuário
+DELETE /api/users/:id   - Remove usuário
+```
+
+## 🐛 Troubleshooting
+
+### Porta já em uso
+Se a porta 4200 ou 3000 já estiver em uso:
 ```bash
-ng test
+# Alterar porta do Angular
+ng serve --port 4300
+
+# Alterar porta do json-server
+json-server --watch db.json --port 3001
 ```
 
-## Running end-to-end tests
+### Erro de CORS
+O proxy já está configurado em `proxy.conf.json`. Certifique-se de que ambos os servidores estejam rodando.
 
-For end-to-end (e2e) testing, run:
+## 👨‍💻 Autor
 
-```bash
-ng e2e
-```
+**Lucas Fernandes Christen**
+- Email: lucaschristen@alunos.utfpr.edu.br
+- Desenvolvido para: Desafio Técnico Sistema IRIS
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## 📝 Licença
 
-## Additional Resources
+Este projeto foi desenvolvido para fins de avaliação técnica.
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+---
+
+⭐ **Observação**: Este projeto demonstra conhecimento em:
+- Angular moderno (v20+)
+- Arquitetura de aplicações
+- Testes unitários
+- Boas práticas de desenvolvimento
+- UI/UX responsivo
+- Gestão de estado
+- Comunicação HTTP
+- Validações e tratamento de erros

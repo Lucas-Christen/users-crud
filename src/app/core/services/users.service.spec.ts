@@ -1,19 +1,31 @@
 import { TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { UsersService } from './users.service';
 import { User } from '../../core/models/user.model';
+import { provideZonelessChangeDetection } from '@angular/core';
 
 describe('UsersService', () => {
   let svc: UsersService;
   let http: HttpTestingController;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({ imports: [HttpClientTestingModule] });
+    TestBed.configureTestingModule({
+      providers: [
+        provideZonelessChangeDetection(),
+        provideHttpClient(),
+        provideHttpClientTesting(),
+        UsersService
+      ]
+    });
+    
     svc = TestBed.inject(UsersService);
     http = TestBed.inject(HttpTestingController);
   });
 
-  afterEach(() => http.verify());
+  afterEach(() => {
+    http.verify();
+  });
 
   it('list() deve fazer GET /api/users', () => {
     const mock: User[] = [{ id: 1, name: 'Ada', email: 'ada@lovelace.dev', age: 28 }];

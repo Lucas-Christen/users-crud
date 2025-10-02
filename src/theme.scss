@@ -1,30 +1,33 @@
 @use '@angular/material' as mat;
 
-/* 1) Paleta IRIS (laranja como primária) */
-$iris-primary: mat.define-palette(mat.$orange-palette, 600, 500, 700);
-$iris-accent:  mat.define-palette(mat.$blue-palette, 600);
-$iris-warn:    mat.define-palette(mat.$red-palette);
+/* Incluir os estilos core do Material (necessário) */
+@include mat.core();
 
-/* 2) Tipografia (Inter/Poppins) */
-$iris-typography: mat.define-typography-config(
-  $font-family: 'Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif',
-  $headline-4: mat.define-typography-level(36px, 44px, 700),
-  $headline-5: mat.define-typography-level(24px, 32px, 700),
-  $body-1:     mat.define-typography-level(14px, 20px, 400),
-  $button:     mat.define-typography-level(14px, 20px, 600)
-);
-
-/* 3) Tema claro */
+/* Definir o tema usando a API nova do Angular Material 20.x */
 $iris-theme: mat.define-theme((
   color: (
     theme-type: light,
-    primary: $iris-primary,
-    tertiary: $iris-accent,
-    error: $iris-warn
+    primary: mat.$orange-palette,
+    tertiary: mat.$blue-palette,
   ),
-  typography: $iris-typography,
-  density: 0,
+  typography: (
+    brand-family: 'Inter, system-ui, sans-serif',
+    plain-family: 'Inter, system-ui, sans-serif',
+  ),
+  density: (
+    scale: 0,
+  )
 ));
 
-/* 4) Aplicar tema a todos os componentes */
-:root { @include mat.all-component-themes($iris-theme); }
+/* Aplicar o tema a todos os componentes */
+html {
+  @include mat.all-component-themes($iris-theme);
+}
+
+/* Customizações adicionais para o tema IRIS */
+html {
+  --mat-sys-primary: #F36C21;
+  --mat-sys-on-primary: #ffffff;
+  --mat-sys-primary-container: #FFEFE1;
+  --mat-sys-on-primary-container: #1F2937;
+}
