@@ -21,8 +21,8 @@
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
-                { "glob": "**/*", "input": "public" },
-                { "glob": "**/*", "input": "src/assets" }
+              { "glob": "**/*", "input": "public" },
+              { "glob": "**/*", "input": "src/assets" }
             ],
             "styles": [
               "src/theme.scss",
@@ -85,13 +85,18 @@
             "tsConfig": "tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
             "assets": [
-              {
-                "glob": "**/*",
-                "input": "public"
-              }
+              { "glob": "**/*", "input": "public" }
             ],
             "styles": [
               "src/styles.scss"
+            ],
+            "codeCoverageExclude": [
+              "src/environments/**",
+              "src/main.ts",
+              "src/app/app.config.ts",
+              "src/app/material.imports.ts",
+              "src/app/**/models/**",
+              "src/app/**/tokens/**"
             ]
           }
         }
