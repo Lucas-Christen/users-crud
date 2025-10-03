@@ -8,6 +8,9 @@ import { of } from 'rxjs';
 import { provideZonelessChangeDetection } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 
+// ✅ importa o token e injeta '/api' para que o service use essa base nos testes
+import { API_BASE_URL } from '../../../core/tokens/api-base-url.token';
+
 describe('UsersListComponent', () => {
   let comp: UsersListComponent;
   let fix: ComponentFixture<UsersListComponent>;
@@ -21,6 +24,7 @@ describe('UsersListComponent', () => {
         provideAnimations(),
         provideHttpClient(),
         provideHttpClientTesting(),
+        { provide: API_BASE_URL, useValue: '/api' }, // ← base usada nos spies/requests
         UsersService
       ]
     }).compileComponents();

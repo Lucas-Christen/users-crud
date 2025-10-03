@@ -9,7 +9,12 @@
     "test": "ng test",
     "serve:ssr:users-crud": "node dist/users-crud/server/server.mjs",
     "server": "json-server --watch db.json --port 3000",
-    "dev": "concurrently \"npm run server\" \"ng serve\""
+    "dev": "concurrently \"npm run server\" \"ng serve\"",
+    "build:ssr": "ng run users-crud:build",
+    "serve:ssr": "node dist/users-crud/server/server.mjs",
+    "ssr": "npm run build:ssr && npm run serve:ssr",
+    "test:coverage": "ng test --watch=false --code-coverage"
+
   },
   "prettier": {
     "printWidth": 100,

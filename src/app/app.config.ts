@@ -6,6 +6,8 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideZonelessChangeDetection } from '@angular/core';
 import { loadingInterceptor } from './core/interceptors/loading.interceptor';
 import { httpErrorInterceptor } from './core/interceptors/http-error.interceptor';
+import { API_BASE_URL } from './core/tokens/api-base-url.token';
+import { environment } from '../environments/environment';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -18,6 +20,9 @@ export const appConfig: ApplicationConfig = {
       ])
     ),
     provideAnimations(),
-    provideZonelessChangeDetection()
+    provideZonelessChangeDetection(),
+
+    { provide: API_BASE_URL, useValue: environment.apiBaseUrl }
+    
   ]
 };

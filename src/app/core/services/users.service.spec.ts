@@ -5,6 +5,9 @@ import { UsersService } from './users.service';
 import { User } from '../../core/models/user.model';
 import { provideZonelessChangeDetection } from '@angular/core';
 
+// ✅ importa o token e injeta '/api' só para os testes
+import { API_BASE_URL } from '../tokens/api-base-url.token';
+
 describe('UsersService', () => {
   let svc: UsersService;
   let http: HttpTestingController;
@@ -15,10 +18,11 @@ describe('UsersService', () => {
         provideZonelessChangeDetection(),
         provideHttpClient(),
         provideHttpClientTesting(),
+        { provide: API_BASE_URL, useValue: '/api' }, // ← base usada nos expects
         UsersService
       ]
     });
-    
+
     svc = TestBed.inject(UsersService);
     http = TestBed.inject(HttpTestingController);
   });
@@ -29,6 +33,7 @@ describe('UsersService', () => {
 
   it('list() deve fazer GET /api/users', () => {
     const mock: User[] = [{ id: 1, name: 'Ada', email: 'ada@lovelace.dev', age: 28 }];
+
     svc.list().subscribe((res: User[]) => expect(res).toEqual(mock));
 
     const req = http.expectOne('/api/users');
@@ -39,6 +44,7 @@ describe('UsersService', () => {
   it('create() deve fazer POST /api/users', () => {
     const payload: User = { name: 'Linus', email: 'linus@x.org' };
     const returned: User = { id: 5, ...payload };
+
     svc.create(payload).subscribe((res: User) => expect(res).toEqual(returned));
 
     const req = http.expectOne('/api/users');
@@ -48,7 +54,9 @@ describe('UsersService', () => {
 
   it('update() deve fazer PUT /api/users/:id', () => {
     const updated: User = { id: 1, name: 'Linus Torvalds', email: 'linus@kernel.org', age: 52 };
-    svc.update(updated).subscribe((res: User) => expect(res).toEqual(updated));
+
+    // ✅ passe os 2 argumentos: id + payload
+    svc.update(updated.id!, updated).subscribe((res: User) => expect(res).toEqual(updated));
 
     const req = http.expectOne('/api/users/1');
     expect(req.request.method).toBe('PUT');

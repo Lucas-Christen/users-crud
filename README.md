@@ -1,209 +1,313 @@
+Você está certo: pelos trechos que você me enviou (`users-list.component.spec.ts`, `app.config.ts`, `main.ts`) **não há uso da Signals API** (`signal`, `computed`, `effect`). Então vou **remover qualquer menção a Signals** do README e te entregar o arquivo completo já pronto, usando os nomes de imagens combinados.
+
+Aqui vai o **README.md** final (cole no GitHub):
+
+````md
 # 🎯 Sistema IRIS - Gestão de Usuários
 
-Aplicação Angular para gerenciamento de usuários com CRUD completo, desenvolvida como parte do desafio técnico.
+Aplicação **Angular 20** completa para gerenciamento de usuários (CRUD), desenvolvida como parte do desafio técnico para **Desenvolvedor Front-End Angular**.
 
+[![Deploy](https://img.shields.io/badge/Vercel-Live-black)](https://users-crud-gules.vercel.app/users)
+[![CI](https://img.shields.io/badge/CI-GitHub_Actions-blue)](.github/workflows/ci.yml)
 ![Angular](https://img.shields.io/badge/Angular-20.3-red)
 ![Material](https://img.shields.io/badge/Material-20.2-blue)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.9-blue)
+![Coverage](https://img.shields.io/badge/coverage-XX%25-brightgreen) <!-- TODO: atualize após rodar coverage -->
+![Lighthouse](https://img.shields.io/badge/Lighthouse-Perf_98_A11y_92_Best_100_SEO_91-2ea44f)
 
-## 📋 Funcionalidades
+---
 
-### ✅ Requisitos Implementados
+## 🔗 Links
 
-- **Listagem de Usuários**
-  - Tabela responsiva com Nome, E-mail e Ações
-  - Edição inline diretamente na tabela
-  - Exclusão com confirmação
-  - Campo de busca por nome ou e-mail
-  - Paginação (5, 10 ou 20 itens por página)
-  - Ordenação por colunas
+- **Produção:** https://users-crud-gules.vercel.app/users  
+- **Repositório:** https://github.com/Lucas-Christen/users-crud
 
-- **Formulário de Adição/Edição**
-  - Formulário reativo com validações em tempo real
-  - **Nome**: obrigatório, mínimo 3 caracteres
-  - **E-mail**: obrigatório, formato válido
-  - **Idade**: opcional, mínimo 18 anos
-  - Mensagens de erro contextuais
-  - Botão desabilitado enquanto formulário inválido
+**Atalhos para o código (diretórios principais):**
+- `src/` → https://github.com/Lucas-Christen/users-crud/tree/master/src  
+- `src/app/` → https://github.com/Lucas-Christen/users-crud/tree/master/src/app  
+- `core/guards` → https://github.com/Lucas-Christen/users-crud/tree/master/src/app/core/guards  
+- `core/interceptors` → https://github.com/Lucas-Christen/users-crud/tree/master/src/app/core/interceptors  
+- `core/models` → https://github.com/Lucas-Christen/users-crud/tree/master/src/app/core/models  
+- `core/services` → https://github.com/Lucas-Christen/users-crud/tree/master/src/app/core/services  
+- `features/users/user-form` → https://github.com/Lucas-Christen/users-crud/tree/master/src/app/features/users/user-form  
+- `features/users/users-list` → https://github.com/Lucas-Christen/users-crud/tree/master/src/app/features/users/users-list  
+- `shared/layout` → https://github.com/Lucas-Christen/users-crud/tree/master/src/app/shared/layout  
+- `shared/components/confirm-dialog` → https://github.com/Lucas-Christen/users-crud/tree/master/src/app/shared/components/confirm-dialog  
 
-- **API REST**
-  - GET - Listar todos os usuários
-  - POST - Adicionar novo usuário
-  - PUT - Atualizar usuário existente
-  - DELETE - Excluir usuário
+---
 
-### 🎁 Funcionalidades Extra
+## 👀 Preview Rápido (Evidências)
 
-- **Loading Global**: Barra de progresso durante requisições HTTP
-- **Tratamento de Erros**: Interceptor com mensagens amigáveis via Snackbar
-- **Design Personalizado**: Tema customizado com paleta de cores IRIS
-- **Responsividade**: Interface adaptada para desktop, tablet e mobile
-- **Testes Unitários**: Cobertura de componentes e serviços
-- **Arquitetura Moderna**: 
-  - Standalone Components
-  - Zoneless Change Detection
-  - Signals API
-  - Server-Side Rendering (SSR)
+| Desktop | Mobile | Lighthouse (scores) |
+|---|---|---|
+| ![Desktop](docs/preview-desktop.png) | ![Mobile](docs/preview-mobile.png) | ![Lighthouse](docs/lighthouse.png) |
 
-## 🚀 Instalação e Execução
 
-### Pré-requisitos
+## ✅ Requisitos Implementados
 
-- Node.js (v18 ou superior)
-- npm ou yarn
+### 1) Listagem de Usuários
+- Tabela responsiva (**Nome**, **E-mail**, **Idade**, **Ações**).
+- **Edição inline** (formulário na própria linha).
+- **Exclusão** com modal de confirmação.
+- **Busca** por nome, e-mail ou idade.
+- **Paginação** (5/10/20) e **ordenação** por colunas.
 
-### Passo a Passo
+### 2) Formulário de Adição/Edição
+- **Reactive Forms** com validações em tempo real.
+- **Nome** obrigatório (mín. 3).
+- **E-mail** obrigatório (formato válido).
+- **Idade** opcional (≥ 18).
+- Mensagens de erro contextuais + **Salvar desabilitado** quando inválido.
+- Mesmo formulário para criar/editar.
 
-1. **Clone o repositório**
-```bash
-git clone <seu-repositorio>
-cd users-crud
+### 3) API REST
+- **GET** `/users` — lista todos.
+- **POST** `/users` — cria.
+- **PUT** `/users/:id` — atualiza.
+- **DELETE** `/users/:id` — remove.
+- HTTP centralizado em **`UsersService`**.
+- Integração com **MockAPI** em produção.
+
+### 4) Validações
+- Mensagens claras por tipo de erro.
+- Campos marcados como *touched* ao submeter inválido.
+- Feedback visual imediato.
+
+### 5) Organização & Boas Práticas
+- Serviço dedicado (`UsersService`) e **arquitetura modular** (Core/Features/Shared).
+- **Componentes standalone** (Angular 20).
+- **SCSS** organizado + Angular Material.
+
+---
+
+## 🔬 Evidências Técnicas (comprovadas no código)
+
+### Zoneless Change Detection (✅)
+Habilitado globalmente via `provideZonelessChangeDetection()`:
+
+```ts
+// src/app/app.config.ts (trecho)
+import { provideZonelessChangeDetection } from '@angular/core';
+export const appConfig = {
+  providers: [
+    // ...
+    provideZonelessChangeDetection()
+  ]
+};
+````
+
+E também nos **tests** do `UsersListComponent`:
+
+```ts
+// src/app/features/users/users-list/users-list.component.spec.ts (trecho)
+providers: [
+  provideZonelessChangeDetection(),
+  // ...
+]
 ```
 
-2. **Instale as dependências**
-```bash
-npm install
+### Interceptors (✅)
+
+* **`loadingInterceptor`** → barra de progresso global.
+* **`httpErrorInterceptor`** → tratamento de erros (SnackBar).
+
+Registrados em `app.config.ts` com `withInterceptors([ ... ])`.
+
+### Bootstrap (✅)
+
+```ts
+// src/main.ts (trecho)
+bootstrapApplication(AppComponent, appConfig)
+  .catch(err => console.error(err));
 ```
 
-3. **Inicie o servidor JSON (API simulada)**
-```bash
-npm run server
-```
-O servidor estará disponível em `http://localhost:3000`
-
-4. **Em outro terminal, inicie a aplicação Angular**
-```bash
-npm start
-```
-A aplicação estará disponível em `http://localhost:4200`
-
-5. **Ou execute ambos simultaneamente**
-```bash
-npm run dev
-```
-
-## 🧪 Executando Testes
-
-```bash
-# Testes unitários
-npm test
-
-# Build de produção
-npm run build
-
-# Servir build SSR
-npm run serve:ssr:users-crud
-```
+---
 
 ## 📂 Estrutura do Projeto
 
 ```
 src/
 ├── app/
-│   ├── core/                    # Funcionalidades essenciais
-│   │   ├── guards/              # Route guards
-│   │   ├── interceptors/        # HTTP interceptors
-│   │   ├── models/              # Interfaces e tipos
-│   │   └── services/            # Serviços (API, loading)
-│   ├── features/                # Módulos de funcionalidades
-│   │   └── users/               # Feature de usuários
-│   │       ├── user-form/       # Formulário reativo
-│   │       └── users-list/      # Listagem e tabela
-│   ├── shared/                  # Componentes compartilhados
-│   │   └── layout/              # Header, footer, etc.
-│   └── material.imports.ts      # Importações do Material
-├── assets/                      # Imagens e recursos estáticos
-├── styles.scss                  # Estilos globais
-└── theme.scss                   # Tema Angular Material
+│   ├── core/                          # Funcionalidades essenciais
+│   │   ├── guards/                    # Route guards (authGuard)
+│   │   ├── interceptors/              # HTTP interceptors (loading, error)
+│   │   ├── models/                    # Interfaces TypeScript (User)
+│   │   └── services/                  # Serviços (UsersService, LoadingService)
+│   ├── features/                      # Módulos de funcionalidades
+│   │   └── users/                     # Feature de gerenciamento de usuários
+│   │       ├── user-form/             # Formulário reativo (add/edit)
+│   │       └── users-list/            # Listagem, busca, tabela e paginação
+│   ├── shared/                        # Componentes compartilhados
+│   │   ├── components/                # Dialog de confirmação
+│   │   └── layout/                    # Header responsivo
+│   ├── app.component.ts               # Componente raiz
+│   ├── app.config.ts                  # Configuração da aplicação
+│   ├── app.routes.ts                  # Definição de rotas
+│   └── material.imports.ts            # Importações do Angular Material
+├── assets/                            # Imagens e recursos estáticos
+│   └── img/                           # Logo do Sistema IRIS
+├── public/                            # Arquivos públicos (favicon)
+├── styles.scss                        # Estilos globais
+└── theme.scss                         # Tema personalizado Angular Material
 ```
 
-## 🎨 Tecnologias Utilizadas
+---
 
-- **Angular 20.3** - Framework principal
-- **Angular Material 20.2** - Componentes UI
-- **RxJS 7.8** - Programação reativa
-- **TypeScript 5.9** - Tipagem estática
-- **json-server 1.0** - API REST simulada
-- **Jasmine + Karma** - Testes unitários
-- **SCSS** - Estilos
+## ⚙️ Ambientes & Variáveis
 
-## 🎯 Destaques Técnicos
-
-### Arquitetura
-- **Standalone Components**: Sem NgModules, componentes independentes
-- **Zoneless**: Melhor performance sem Zone.js
-- **Signals**: API reativa moderna do Angular
-- **Lazy Loading**: Componentes carregados sob demanda
-
-### Padrões Implementados
-- **Separation of Concerns**: Core, Features, Shared
-- **Service Layer**: Comunicação HTTP centralizada
-- **Reactive Forms**: Validações robustas e reativas
-- **Interceptors**: Loading e error handling globais
-- **Guards**: Proteção de rotas (preparado para autenticação)
-
-### Performance
-- **OnPush Strategy**: Detecção de mudanças otimizada
-- **Lazy Loading**: Carregamento sob demanda
-- **Server-Side Rendering**: SEO e primeira renderização rápida
-
-## 📱 Responsividade
-
-A aplicação é totalmente responsiva, com breakpoints em:
-- **Desktop**: ≥ 1200px
-- **Tablet**: 768px - 1199px
-- **Mobile**: < 768px
-
-## 🔒 Segurança
-
-- Validações no frontend e preparado para validações no backend
-- Proteção XSS através do DomSanitizer do Angular
-- Guard preparado para autenticação (pode ser expandido)
-
-## 📄 API Endpoints
-
-A API simulada (json-server) disponibiliza:
-
-```
-GET    /api/users       - Lista todos os usuários
-POST   /api/users       - Cria novo usuário
-PUT    /api/users/:id   - Atualiza usuário
-DELETE /api/users/:id   - Remove usuário
+```ts
+// src/environments/environment.ts
+export const environment = {
+  production: false,
+  apiBaseUrl: 'http://localhost:3000' // json-server dev
+};
 ```
 
-## 🐛 Troubleshooting
+```ts
+// src/environments/environment.prod.ts
+export const environment = {
+  production: true,
+  apiBaseUrl: (import.meta as any).env?.['NG_APP_API_BASE_URL']
+           || 'https://68ded03a898434f4135618f1.mockapi.io'
+};
+```
 
-### Porta já em uso
-Se a porta 4200 ou 3000 já estiver em uso:
+**Vercel → Project Settings → Environment Variables**
+Defina: `NG_APP_API_BASE_URL = https://68ded03a898434f4135618f1.mockapi.io`
+
+---
+
+## 🚀 Instalação & Execução
+
+### Pré-requisitos
+
+* Node.js 18+
+* npm
+
+### Passo a passo
+
 ```bash
-# Alterar porta do Angular
-ng serve --port 4300
+# 1) Clonar
+git clone https://github.com/Lucas-Christen/users-crud
+cd users-crud
 
-# Alterar porta do json-server
-json-server --watch db.json --port 3001
+# 2) Instalar
+npm ci
+
+# 3) Opção A: frontend (dev)
+npm start
+# http://localhost:4200
+
+# 3) Opção B: API mock local (json-server)
+npm run server
+# http://localhost:3000
+
+# 3) Opção C: tudo junto (se configurado)
+npm run dev
 ```
 
-### Erro de CORS
-O proxy já está configurado em `proxy.conf.json`. Certifique-se de que ambos os servidores estejam rodando.
+### Build
+
+```bash
+npm run build
+```
+
+### SSR (✅ implementado)
+
+```bash
+npm run ssr
+# http://localhost:4000
+# Em /users, faça "View Source" e confirme o HTML da tabela renderizado.
+```
+
+**Evidência:** ![SSR View Source](docs/ssr-view-source.png)
+
+---
+
+## 📱 API (Produção)
+
+**Base:** `https://68ded03a898434f4135618f1.mockapi.io`
+
+| Método | Endpoint     | Descrição                  |
+| -----: | ------------ | -------------------------- |
+|    GET | `/users`     | Lista todos os usuários    |
+|   POST | `/users`     | Cria novo usuário          |
+|    PUT | `/users/:id` | Atualiza usuário existente |
+| DELETE | `/users/:id` | Exclui usuário             |
+
+**Modelo**
+
+```ts
+export interface User {
+  id?: number;     // gerado pela API
+  name: string;    // min 3
+  email: string;   // formato válido
+  age?: number;    // opcional, >= 18
+}
+```
+
+---
+
+## ♿ Acessibilidade (A11y)
+
+* HTML semântico (`table/thead/tbody/th[scope]`).
+* Labels/`aria-*` nos inputs.
+* Foco visível, navegação por teclado, contraste AA.
+
+---
+
+## 📊 Lighthouse & Bundle
+
+| Métrica        | Score |
+| -------------- | ----- |
+| Performance    | 98    |
+| Accessibility  | 92    |
+| Best Practices | 100   |
+| SEO            | 91    |
+
+**Relatório:** ![Lighthouse](docs/lighthouse.png)
+
+**Bundle (após build):**
+
+```
+dist/...
+- main-XXXXX.js   ~804 kB (raw) / ~175 kB (transfer est.)
+- styles.css      ~55 kB  (raw) /  ~6 kB (transfer est.)
+```
+
+> Observação: há um *warning* de orçamento (budget) > 500 kB em *raw size*. Não bloqueia o build; pode ser ajustado no `angular.json` ou otimizado depois.
+
+---
+
+## 🧪 Testes
+
+```bash
+npm test
+npm run test:coverage  # gera coverage/index.html
+```
+
+> Atualize o **badge de cobertura** no topo após rodar `test:coverage`.
+
+---
+
+## 📝 Checklist de Entrega
+
+* [x] CRUD completo (lista/busca/adicionar/editar/excluir)
+* [x] Reactive Forms + validações
+* [x] Serviço centralizado (UsersService)
+* [x] Interceptors (loading/erro)
+* [x] Responsivo + A11y
+* [x] Deploy público (Vercel)
+* [x] README detalhado
+* [x] Testes unitários base
+* [x] SSR com evidência (*View Source*)
+* [ ] Lazy (quando aplicável)
+
+---
 
 ## 👨‍💻 Autor
 
 **Lucas Fernandes Christen**
-- Email: lucaschristen@alunos.utfpr.edu.br
-- Desenvolvido para: Desafio Técnico Sistema IRIS
+📧 [lucaschristen@alunos.utfpr.edu.br](mailto:lucaschristen@alunos.utfpr.edu.br)
+🗓️ Data limite do desafio: 08/10/2025
 
-## 📝 Licença
-
-Este projeto foi desenvolvido para fins de avaliação técnica.
-
----
-
-⭐ **Observação**: Este projeto demonstra conhecimento em:
-- Angular moderno (v20+)
-- Arquitetura de aplicações
-- Testes unitários
-- Boas práticas de desenvolvimento
-- UI/UX responsivo
-- Gestão de estado
-- Comunicação HTTP
-- Validações e tratamento de erros
