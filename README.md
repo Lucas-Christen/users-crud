@@ -1,307 +1,308 @@
-Você está certo: pelos trechos que você me enviou (`users-list.component.spec.ts`, `app.config.ts`, `main.ts`) **não há uso da Signals API** (`signal`, `computed`, `effect`). Então vou **remover qualquer menção a Signals** do README e te entregar o arquivo completo já pronto, usando os nomes de imagens combinados.
+# 🎯 Sistema IRIS – Gestão de Usuários
 
-Aqui vai o **README.md** final (cole no GitHub):
+Aplicação **Angular** para gestão de usuários (CRUD) desenvolvida para o desafio de **Desenvolvedor Front-End Angular**.
 
-````md
-# 🎯 Sistema IRIS - Gestão de Usuários
-
-Aplicação **Angular 20** completa para gerenciamento de usuários (CRUD), desenvolvida como parte do desafio técnico para **Desenvolvedor Front-End Angular**.
-
-[![Deploy](https://img.shields.io/badge/Vercel-Live-black)](https://users-crud-gules.vercel.app/users)
-[![CI](https://img.shields.io/badge/CI-GitHub_Actions-blue)](.github/workflows/ci.yml)
-![Angular](https://img.shields.io/badge/Angular-20.3-red)
-![Material](https://img.shields.io/badge/Material-20.2-blue)
+![Angular](https://img.shields.io/badge/Angular-20.x-red)
+![Material](https://img.shields.io/badge/Angular%20Material-20.x-blue)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.9-blue)
-![Coverage](https://img.shields.io/badge/coverage-XX%25-brightgreen) <!-- TODO: atualize após rodar coverage -->
-![Lighthouse](https://img.shields.io/badge/Lighthouse-Perf_98_A11y_92_Best_100_SEO_91-2ea44f)
-
----
+![SSR](https://img.shields.io/badge/SSR-enabled-success)
+![Deploy](https://img.shields.io/badge/Deploy-Vercel-black)
+![Coverage](https://img.shields.io/badge/coverage-95%25%20lines-green)
+![Tests](https://img.shields.io/badge/tests-80%20passing-brightgreen)
 
 ## 🔗 Links
 
-- **Produção:** https://users-crud-gules.vercel.app/users  
-- **Repositório:** https://github.com/Lucas-Christen/users-crud
-
-**Atalhos para o código (diretórios principais):**
-- `src/` → https://github.com/Lucas-Christen/users-crud/tree/master/src  
-- `src/app/` → https://github.com/Lucas-Christen/users-crud/tree/master/src/app  
-- `core/guards` → https://github.com/Lucas-Christen/users-crud/tree/master/src/app/core/guards  
-- `core/interceptors` → https://github.com/Lucas-Christen/users-crud/tree/master/src/app/core/interceptors  
-- `core/models` → https://github.com/Lucas-Christen/users-crud/tree/master/src/app/core/models  
-- `core/services` → https://github.com/Lucas-Christen/users-crud/tree/master/src/app/core/services  
-- `features/users/user-form` → https://github.com/Lucas-Christen/users-crud/tree/master/src/app/features/users/user-form  
-- `features/users/users-list` → https://github.com/Lucas-Christen/users-crud/tree/master/src/app/features/users/users-list  
-- `shared/layout` → https://github.com/Lucas-Christen/users-crud/tree/master/src/app/shared/layout  
-- `shared/components/confirm-dialog` → https://github.com/Lucas-Christen/users-crud/tree/master/src/app/shared/components/confirm-dialog  
+* **Produção (Vercel)**: [https://users-crud-gules.vercel.app/users](https://users-crud-gules.vercel.app/users)
+* **Repositório**: [https://github.com/Lucas-Christen/users-crud](https://github.com/Lucas-Christen/users-crud)
 
 ---
 
-## 👀 Preview Rápido (Evidências)
+## 👀 Preview
 
-| Desktop | Mobile | Lighthouse (scores) |
-|---|---|---|
-| ![Desktop](docs/preview-desktop.png) | ![Mobile](docs/preview-mobile.png) | ![Lighthouse](docs/lighthouse.png) |
+<p align="center">
+  <img src="./docs/preview-desktop.png" alt="Preview Desktop" width="75%" />
+</p>
+<p align="center">
+  <img src="./docs/preview-mobile.png" alt="Preview Mobile" width="40%" />
+</p>
 
+---
 
-## ✅ Requisitos Implementados
+## ✅ Requisitos do Desafio – Implementados
 
 ### 1) Listagem de Usuários
-- Tabela responsiva (**Nome**, **E-mail**, **Idade**, **Ações**).
-- **Edição inline** (formulário na própria linha).
-- **Exclusão** com modal de confirmação.
-- **Busca** por nome, e-mail ou idade.
-- **Paginação** (5/10/20) e **ordenação** por colunas.
+
+* Tabela com **Nome**, **E-mail**, **Idade** e **Ações**
+* **Edição inline** por linha
+* **Exclusão** com **modal de confirmação**
+* **Busca** por nome/e-mail/idade
+* **Paginação** (5/10/20) e **ordenação** por colunas
 
 ### 2) Formulário de Adição/Edição
-- **Reactive Forms** com validações em tempo real.
-- **Nome** obrigatório (mín. 3).
-- **E-mail** obrigatório (formato válido).
-- **Idade** opcional (≥ 18).
-- Mensagens de erro contextuais + **Salvar desabilitado** quando inválido.
-- Mesmo formulário para criar/editar.
+
+* **Reactive Forms** com validações e mensagens de erro
+* **Nome** obrigatório (min. 3)
+* **E-mail** obrigatório (formato válido)
+* **Idade** opcional (>= 18) com validador `minAgeOrNull`
+* Botão **Salvar** desabilitado enquanto inválido
+* Mesmo formulário serve para **criar** e **editar**
 
 ### 3) API REST
-- **GET** `/users` — lista todos.
-- **POST** `/users` — cria.
-- **PUT** `/users/:id` — atualiza.
-- **DELETE** `/users/:id` — remove.
-- HTTP centralizado em **`UsersService`**.
-- Integração com **MockAPI** em produção.
 
-### 4) Validações
-- Mensagens claras por tipo de erro.
-- Campos marcados como *touched* ao submeter inválido.
-- Feedback visual imediato.
+* **GET** `/users` • **POST** `/users` • **PUT** `/users/:id` • **DELETE** `/users/:id`
+* Serviço dedicado **`UsersService`**
+* Desenvolvimento com **proxy** (`/api` → json-server)
+* Produção configurável via **env** + token (ver abaixo)
 
-### 5) Organização & Boas Práticas
-- Serviço dedicado (`UsersService`) e **arquitetura modular** (Core/Features/Shared).
-- **Componentes standalone** (Angular 20).
-- **SCSS** organizado + Angular Material.
+### 4) Validações e Feedback
 
----
+* Erros exibidos por campo
+* Loading global via interceptor + barra no topo
+* Snackbar para mensagens de sucesso/erro
 
-## 🔬 Evidências Técnicas (comprovadas no código)
+### 5) Organização e Boas Práticas
 
-### Zoneless Change Detection (✅)
-Habilitado globalmente via `provideZonelessChangeDetection()`:
-
-```ts
-// src/app/app.config.ts (trecho)
-import { provideZonelessChangeDetection } from '@angular/core';
-export const appConfig = {
-  providers: [
-    // ...
-    provideZonelessChangeDetection()
-  ]
-};
-````
-
-E também nos **tests** do `UsersListComponent`:
-
-```ts
-// src/app/features/users/users-list/users-list.component.spec.ts (trecho)
-providers: [
-  provideZonelessChangeDetection(),
-  // ...
-]
-```
-
-### Interceptors (✅)
-
-* **`loadingInterceptor`** → barra de progresso global.
-* **`httpErrorInterceptor`** → tratamento de erros (SnackBar).
-
-Registrados em `app.config.ts` com `withInterceptors([ ... ])`.
-
-### Bootstrap (✅)
-
-```ts
-// src/main.ts (trecho)
-bootstrapApplication(AppComponent, appConfig)
-  .catch(err => console.error(err));
-```
+* Arquitetura **Core / Features / Shared**
+* **Standalone Components** (Angular 20)
+* **Interceptors** (loading & http-error)
+* **Guard** preparado para autenticação
+* Estilo com **SCSS** + **Angular Material**
 
 ---
 
-## 📂 Estrutura do Projeto
+## 🎁 Diferenciais
+
+### Signals no layout (menu mobile)
+
+`HeaderComponent` usa **Angular Signals** para o estado do menu mobile:
+
+```ts
+isMenuOpen = signal(false);
+toggleMenu() { this.isMenuOpen.update(v => !v); }
+```
+
+Leitura direta no template (`isMenuOpen()`) e binding em classe `[class.menu-open]`, reduzindo boilerplate e funcionando muito bem com **zoneless**.
+
+### Zoneless Change Detection
+
+Ativado via `provideZonelessChangeDetection`.
+
+<p><img src="./docs/zoneless-proof.png" alt="Zoneless proof" width="65%" /></p>
+
+### SSR habilitado
+
+Build e serve **Server-Side Rendering**.
+
+<p><img src="./docs/ssr-view-source.png" alt="SSR view source" width="80%" /></p>
+
+### Lazy Loading
+
+Rotas com `loadComponent` (carga do UsersList sob demanda).
+
+### Acessibilidade & Responsividade
+
+ARIA/role/labels, tooltips, navegação por teclado e layout fluido para desktop/tablet/mobile.
+
+---
+
+## 🧪 Testes & Cobertura
+
+* **80 testes passando**
+* **Cobertura atual**:
+
+  * **Statements:** 93.91% (135/144)
+  * **Branches:** 90.69% (39/43)
+  * **Functions:** 91.22% (52/57)
+  * **Lines:** **95.16% (118/124)**
+
+<p>
+  <img src="./docs/test-pass.png" alt="Tests pass" width="78%" />
+</p>
+<p>
+  <img src="./docs/coverage-summary.png" alt="Coverage summary" width="95%" />
+</p>
+
+### Como rodar os testes
+
+```bash
+npm test
+# ou com cobertura:
+ng test --watch=false --code-coverage --browsers=ChromeHeadless
+# relatório HTML: ./coverage/users-crud/index.html
+```
+
+---
+
+## 🚀 Lighthouse & A11y
+
+* **Performance** 98 • **Acessibilidade** 92 • **Best Practices** 100 • **SEO** 91
+
+<p>
+  <img src="./docs/lighthouse-summary.png" alt="Lighthouse summary" width="70%" />
+</p>
+<p>
+  <img src="./docs/a11y.png" alt="Acessibilidade" width="70%" />
+</p>
+
+---
+
+## 🏗️ Arquitetura
 
 ```
 src/
 ├── app/
-│   ├── core/                          # Funcionalidades essenciais
-│   │   ├── guards/                    # Route guards (authGuard)
-│   │   ├── interceptors/              # HTTP interceptors (loading, error)
-│   │   ├── models/                    # Interfaces TypeScript (User)
-│   │   └── services/                  # Serviços (UsersService, LoadingService)
-│   ├── features/                      # Módulos de funcionalidades
-│   │   └── users/                     # Feature de gerenciamento de usuários
-│   │       ├── user-form/             # Formulário reativo (add/edit)
-│   │       └── users-list/            # Listagem, busca, tabela e paginação
-│   ├── shared/                        # Componentes compartilhados
-│   │   ├── components/                # Dialog de confirmação
-│   │   └── layout/                    # Header responsivo
-│   ├── app.component.ts               # Componente raiz
-│   ├── app.config.ts                  # Configuração da aplicação
-│   ├── app.routes.ts                  # Definição de rotas
-│   └── material.imports.ts            # Importações do Angular Material
-├── assets/                            # Imagens e recursos estáticos
-│   └── img/                           # Logo do Sistema IRIS
-├── public/                            # Arquivos públicos (favicon)
-├── styles.scss                        # Estilos globais
-└── theme.scss                         # Tema personalizado Angular Material
+│   ├── core/
+│   │   ├── guards/                 # authGuard
+│   │   ├── interceptors/           # loading + http-error
+│   │   ├── models/                 # interfaces (User)
+│   │   ├── services/               # UsersService, LoadingService
+│   │   └── tokens/                 # API_BASE_URL (InjectionToken)
+│   ├── features/
+│   │   └── users/
+│   │       ├── user-form/          # Reactive form (add/edit)
+│   │       └── users-list/         # Tabela, busca, paginação, ordenação
+│   ├── shared/
+│   │   ├── components/confirm-dialog
+│   │   └── layout/                 # Header (Signals)
+│   ├── app.component.ts
+│   ├── app.config.ts               # Providers (interceptors, zoneless, router, http)
+│   ├── app.routes.ts               # Rotas com lazy loading
+│   └── material.imports.ts         # Imports do Angular Material
+├── assets/
+├── public/
+├── styles.scss
+├── theme.scss
+└── vite-env.d.ts                   # Tipagem de import.meta.env
+```
+
+**Rotas (lazy):**
+
+```ts
+export const routes: Routes = [
+  { path: '', pathMatch: 'full', redirectTo: 'users' },
+  {
+    path: 'users',
+    loadComponent: () =>
+      import('./features/users/users-list/users-list.component')
+        .then(m => m.UsersListComponent),
+    canActivate: [authGuard]
+  },
+  { path: '**', redirectTo: 'users' }
+];
 ```
 
 ---
 
-## ⚙️ Ambientes & Variáveis
+## 🌐 Configuração de API (dev/prod) — **compatível com SSR/Vite**
+
+* O projeto usa um **InjectionToken** `API_BASE_URL` que lê a env **estaticamente** (`import.meta.env.NG_APP_API_BASE_URL`) e faz fallback para `'/api'` (proxy em dev).
+
+**`src/app/core/tokens/api-base-url.token.ts` (resumo):**
 
 ```ts
-// src/environments/environment.ts
-export const environment = {
-  production: false,
-  apiBaseUrl: 'http://localhost:3000' // json-server dev
-};
+export const API_BASE_URL = new InjectionToken<string>('API_BASE_URL', {
+  providedIn: 'root',
+  factory: () => import.meta.env.NG_APP_API_BASE_URL?.trim() || '/api'
+});
 ```
+
+**Tipagem do Vite** (arquivo já adicionado):
 
 ```ts
-// src/environments/environment.prod.ts
-export const environment = {
-  production: true,
-  apiBaseUrl: (import.meta as any).env?.['NG_APP_API_BASE_URL']
-           || 'https://68ded03a898434f4135618f1.mockapi.io'
-};
+// vite-env.d.ts
+/// <reference types="vite/client" />
+interface ImportMetaEnv {
+  readonly NG_APP_API_BASE_URL?: string;
+}
+interface ImportMeta {
+  readonly env: ImportMetaEnv;
+}
 ```
 
-**Vercel → Project Settings → Environment Variables**
-Defina: `NG_APP_API_BASE_URL = https://68ded03a898434f4135618f1.mockapi.io`
+> ✅ Nunca use acesso dinâmico a `import.meta.env` (ex.: `const env = import.meta.env` ou `import.meta.env['X']`). Sempre **acesso estático**: `import.meta.env.NG_APP_API_BASE_URL`.
+
+### Dev
+
+* **API mock:** `json-server` em `http://localhost:3000`
+* **Proxy:** requisições para `/api` são redirecionadas ao json-server
 
 ---
 
-## 🚀 Instalação & Execução
+## 🔧 Como rodar
 
 ### Pré-requisitos
 
-* Node.js 18+
-* npm
+* **Node 18+**
 
-### Passo a passo
+### Instalação
 
 ```bash
-# 1) Clonar
 git clone https://github.com/Lucas-Christen/users-crud
 cd users-crud
+npm install
+```
 
-# 2) Instalar
-npm ci
+### Desenvolvimento
 
-# 3) Opção A: frontend (dev)
-npm start
-# http://localhost:4200
+```bash
+# Terminal 1 – API mock (json-server)
+npm run server   # http://localhost:3000
 
-# 3) Opção B: API mock local (json-server)
-npm run server
-# http://localhost:3000
+# Terminal 2 – App
+npm start        # http://localhost:4200
+```
 
-# 3) Opção C: tudo junto (se configurado)
+### Dev (tudo junto)
+
+```bash
 npm run dev
 ```
 
-### Build
-
-```bash
-npm run build
-```
-
-### SSR (✅ implementado)
+### Produção (SSR local)
 
 ```bash
 npm run ssr
-# http://localhost:4000
-# Em /users, faça "View Source" e confirme o HTML da tabela renderizado.
+# equivale a: npm run build:ssr && npm run serve:ssr
 ```
-
-**Evidência:** ![SSR View Source](docs/ssr-view-source.png)
 
 ---
 
-## 📱 API (Produção)
+## 📱 API Endpoints (MockAPI / Dev)
 
-**Base:** `https://68ded03a898434f4135618f1.mockapi.io`
-
-| Método | Endpoint     | Descrição                  |
-| -----: | ------------ | -------------------------- |
-|    GET | `/users`     | Lista todos os usuários    |
-|   POST | `/users`     | Cria novo usuário          |
-|    PUT | `/users/:id` | Atualiza usuário existente |
-| DELETE | `/users/:id` | Exclui usuário             |
+```
+GET    /users
+POST   /users
+PUT    /users/:id
+DELETE /users/:id
+```
 
 **Modelo**
 
 ```ts
 export interface User {
-  id?: number;     // gerado pela API
-  name: string;    // min 3
-  email: string;   // formato válido
-  age?: number;    // opcional, >= 18
+  id?: number | string;
+  name: string;   // min 3
+  email: string;  // formato válido
+  age?: number;   // opcional, >= 18
 }
 ```
 
 ---
 
-## ♿ Acessibilidade (A11y)
+## 🧭 Scripts úteis
 
-* HTML semântico (`table/thead/tbody/th[scope]`).
-* Labels/`aria-*` nos inputs.
-* Foco visível, navegação por teclado, contraste AA.
-
----
-
-## 📊 Lighthouse & Bundle
-
-| Métrica        | Score |
-| -------------- | ----- |
-| Performance    | 98    |
-| Accessibility  | 92    |
-| Best Practices | 100   |
-| SEO            | 91    |
-
-**Relatório:** ![Lighthouse](docs/lighthouse.png)
-
-**Bundle (após build):**
-
+```json
+{
+  "start": "ng serve",
+  "server": "json-server --watch db.json --port 3000",
+  "dev": "concurrently \"npm run server\" \"ng serve\"",
+  "test": "ng test",
+  "build": "ng build",
+  "build:ssr": "ng build && ng run users-crud:server",
+  "serve:ssr": "node dist/users-crud/server/server.mjs",
+  "ssr": "npm run build:ssr && npm run serve:ssr"
+}
 ```
-dist/...
-- main-XXXXX.js   ~804 kB (raw) / ~175 kB (transfer est.)
-- styles.css      ~55 kB  (raw) /  ~6 kB (transfer est.)
-```
-
-> Observação: há um *warning* de orçamento (budget) > 500 kB em *raw size*. Não bloqueia o build; pode ser ajustado no `angular.json` ou otimizado depois.
-
----
-
-## 🧪 Testes
-
-```bash
-npm test
-npm run test:coverage  # gera coverage/index.html
-```
-
-> Atualize o **badge de cobertura** no topo após rodar `test:coverage`.
-
----
-
-## 📝 Checklist de Entrega
-
-* [x] CRUD completo (lista/busca/adicionar/editar/excluir)
-* [x] Reactive Forms + validações
-* [x] Serviço centralizado (UsersService)
-* [x] Interceptors (loading/erro)
-* [x] Responsivo + A11y
-* [x] Deploy público (Vercel)
-* [x] README detalhado
-* [x] Testes unitários base
-* [x] SSR com evidência (*View Source*)
-* [ ] Lazy (quando aplicável)
 
 ---
 
@@ -309,5 +310,26 @@ npm run test:coverage  # gera coverage/index.html
 
 **Lucas Fernandes Christen**
 📧 [lucaschristen@alunos.utfpr.edu.br](mailto:lucaschristen@alunos.utfpr.edu.br)
-🗓️ Data limite do desafio: 08/10/2025
 
+---
+
+## 🏆 Destaques Técnicos
+
+* Angular 20 (standalone), **Signals no layout**, **lazy loading**, **SSR**
+* **Zoneless Change Detection** + Interceptors globais
+* Reactive Forms com validadores customizados
+* Tabela com filtro, paginação e ordenação
+* Testes cobrindo service, componentes, guard e interceptors
+  **Cobertura**: *Statements 93.91% • Branches 90.69% • Functions 91.22% • Lines 95.16%*
+* UI responsiva e acessível (Material)
+
+---
+
+## 📎 Prints (diretório `docs/`)
+
+* `preview-desktop.png` • `preview-mobile.png`
+* `lighthouse-summary.png` • `a11y.png`
+* `test-pass.png` • `coverage-summary.png`
+* `ssr-view-source.png` • `zoneless-proof.png`
+
+---
