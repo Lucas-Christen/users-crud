@@ -23,7 +23,6 @@ export class UsersService {
     return this.http.post<User>(this.url(), payload);
   }
 
-  // ── OVERLOADS: aceita update(user) OU update(id, payload) ───────────────────
   update(user: User): Observable<User>;
   update(id: number | string, payload: User): Observable<User>;
   update(arg1: User | number | string, arg2?: User): Observable<User> {
@@ -39,7 +38,6 @@ export class UsersService {
       return this.http.put<User>(this.url(`/${id}`), payload);
     }
   }
-  // ────────────────────────────────────────────────────────────────────────────
 
   delete(id: number | string): Observable<void> {
     return this.http.delete<void>(this.url(`/${id}`));

@@ -1,0 +1,21 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist/users-crud/browser",
+  "framework": "angular",
+  "rewrites": [
+    {
+      "source": "/api/users/:id",
+      "destination": "/api/users?id=:id"
+    },
+    {
+      "source": "/api/users",
+      "destination": "/api/users"
+    }
+  ],
+  "functions": {
+    "api/users.ts": {
+      "memory": 1024,
+      "maxDuration": 10
+    }
+  }
+}

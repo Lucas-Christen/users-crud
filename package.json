@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build --configuration production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:users-crud": "node dist/users-crud/server/server.mjs",
@@ -13,8 +13,8 @@
     "build:ssr": "ng run users-crud:build",
     "serve:ssr": "node dist/users-crud/server/server.mjs",
     "ssr": "npm run build:ssr && npm run serve:ssr",
-    "test:coverage": "ng test --watch=false --code-coverage"
-
+    "test:coverage": "ng test --watch=false --code-coverage",
+    "build:vercel": "ng build --configuration production"
   },
   "prettier": {
     "printWidth": 100,
@@ -53,6 +53,7 @@
     "@types/express": "^5.0.1",
     "@types/jasmine": "~5.1.0",
     "@types/node": "^20.17.19",
+    "@vercel/node": "^5.3.24",
     "concurrently": "^9.2.1",
     "jasmine-core": "~5.9.0",
     "karma": "~6.4.0",
