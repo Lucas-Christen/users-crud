@@ -1,7 +1,14 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 
+interface User {
+  id?: string;
+  name: string;
+  email: string;
+  age?: number;
+}
+
 // Dados iniciais
-let users = [
+let users: User[] = [
   { id: "1", name: "Ada Lovelace", email: "ada@lovelace.dev", age: 28 },
   { id: "2", name: "Alan Turing", email: "alan@turing.ai", age: 41 },
   { id: "3", name: "Linus Torvalds", email: "linus@kernel.org", age: 30 },
@@ -23,7 +30,7 @@ export default function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   const { method, query, body } = req;
-  const userId = query.id as string | undefined;
+  const userId = query['id'] as string | undefined;
 
   try {
     switch (method) {
@@ -37,7 +44,7 @@ export default function handler(req: VercelRequest, res: VercelResponse) {
         return res.status(200).json(users);
 
       case 'POST':
-        const newUser = {
+        const newUser: User = {
           ...body,
           id: Date.now().toString()
         };
